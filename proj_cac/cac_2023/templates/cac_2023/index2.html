@@ -1,4 +1,5 @@
 {% extends "cac_2023/base.html" %}
+{% load static %}
 
 {% block titulo %}
 
@@ -39,6 +40,11 @@ index_2
     </article>    
     {% endfor %}
 
+</section>
+
+<section>
+    <h2>imagen!</h2>
+    <img src= "{% static "cac_2023/img/fondo.jpg"%}" alt="imagen" >
 </section>
 
 {% endblock %}
