@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from .forms import ConsultaForm
+
 # Create your views here.
 def index(request):
     return HttpResponse("hola mundo django 2023!!!")
@@ -66,7 +68,10 @@ def index2(request):
 
 def consulta(request):
     
-    context = {}
+    consulta_form = ConsultaForm()
+    
+    context = {"form": consulta_form}
+    
     
     return render(request, "cac_2023/consulta.html", context)
 

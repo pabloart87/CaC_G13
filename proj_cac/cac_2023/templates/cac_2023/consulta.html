@@ -10,8 +10,15 @@
 
 {% block contenido %}
 
-<form action="" method="post" id="formulario">    
-    <h2 class="titulo_form">COMPLETE LOS CAMPOS PARA REALIZAR UNA CONSULTA</h2>
+<form method="POST">    
+    {% csrf_token %}
+    {{form}}
+    <input type= "submit">
+</form>
+
+{% endblock %} 
+
+"""<h2 class="titulo_form">COMPLETE LOS CAMPOS PARA REALIZAR UNA CONSULTA</h2>
     
     <label for="nombre">Nombre y apellido:</label>
     <input class="input" type="text" id="nombre" required/><br><br>
@@ -47,8 +54,4 @@
     <!-- <input class="submit" type="submit" onClick="return EnviarFormulario()" value="Enviar" id="boton"> -->
 
     <div id="error"></div>
-    <div id="enviado"></div>
-
-</form>
-
-{% endblock %} 
+    <div id="enviado"></div>"""
