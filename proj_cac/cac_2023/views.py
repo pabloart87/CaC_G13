@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from django.contrib import messages
 from .forms import ConsultaForm
 
 # Create your views here.
@@ -67,12 +67,20 @@ def index2(request):
     return render(request, "cac_2023/index2.html", context)
 
 def consulta(request):
-    
-    consulta_form = ConsultaForm()
+    if request.method == "POST":
+        consulta_form = ConsultaForm(request.POST)
+        if consulta_form.is_valid():
+            
+            print("-----------------")
+            print(consulta_form.cleaned_data["mail"])
+            print(consulta_form.cleaned_data["est_mar"])
+            
+            messages.add_message(request, messages.SUCCESS, "Consulta enviada con éxito", extra_tags="tag1")
+    else:
+        consulta_form = ConsultaForm()
     
     context = {"form": consulta_form}
-    
-    
+        
     return render(request, "cac_2023/consulta.html", context)
 
 def inicio(request):
