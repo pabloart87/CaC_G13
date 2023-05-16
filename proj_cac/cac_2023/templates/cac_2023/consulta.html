@@ -1,14 +1,43 @@
+
 {% extends "cac_2023/base.html" %}
 
-{% block titulo %} Consulta Datos {% endblock %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'cac_2023/css/ingreso_datos.css' %}">
+{% endblock %}
+
+{% block titulo %}Envianos tu consulta{% endblock %}
 
 {% block encabezado %}
+<h1>Envianos tu consulta</h1>
+<h2>Nos pondremos en contacto a la brevedad</h2>
+{% endblock %}
 
-<h1 style= "color: lightblue;" align="center"> BIENVENIDO A LA PAGINA DE CONSULTA DE LOS DATOS MAREOGRAFICOS </h1>
+{% block contenido %}
+<form action="{% url 'consulta' %}" method="POST">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit">
+</form>
+
+{% endblock %}
+
+
+
+
+<!-- 
+
+
+{% block titulo1 %} Consulta Datos {% endblock %}
+
+{% block encabezado1 %}
+
+<h1> envianos tu consulta </h1>
 
 {% endblock %} 
 
-{% block contenido %}
+{% block contenido1 %}
 
 <form action="" method="post" id="formulario">    
     <h2 class="titulo_form">COMPLETE LOS CAMPOS PARA REALIZAR UNA CONSULTA</h2>
@@ -44,11 +73,13 @@
 
     <button class="submit" type="submit" onclick="return EnviarFormulario()" id="boton">Enviar</button>
     <input type="Reset" value="Borrar todo">
-    <!-- <input class="submit" type="submit" onClick="return EnviarFormulario()" value="Enviar" id="boton"> -->
+
+
+    <input class="submit" type="submit" onClick="return EnviarFormulario()" value="Enviar" id="boton">  
 
     <div id="error"></div>
     <div id="enviado"></div>
 
-</form>
+</form> 
 
-{% endblock %} 
+ {% endblock %}  -->

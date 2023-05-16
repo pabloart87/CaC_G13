@@ -1,13 +1,32 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from .forms import AltaUsuarioForm, EnviarConsultaForm
 
 # Create your views here.
 def index(request):
     return HttpResponse("hola mundo django 2023!!!")
 
+# def ingreso_datos(request):
+#     context = {}
+#     return render(request, "cac_2023/ingreso_datos.html", context)
+
 def ingreso_datos(request):
-    context = {}
+
+    if request.method == "POST":
+
+        alta_usuario_form = AltaUsuarioForm(request.POST)
+
+    else:
+
+        alta_usuario_form = AltaUsuarioForm()
+
+    context = {
+        'form' : alta_usuario_form
+        }
+    
     return render(request, "cac_2023/ingreso_datos.html", context)
+
 
 def eliminar_datos(request):
     context = {}
@@ -65,10 +84,27 @@ def index2(request):
     return render(request, "cac_2023/index2.html", context)
 
 def consulta(request):
-    
-    context = {}
-    
+
+    if request.method == "POST":
+        form = EnviarConsultaForm(request.POST)
+        if form.is_valid():
+            print("------------------------")
+            print(form.cleaned_data['mail'])
+
+            messages.add_message(request, messages.SUCCESS, 'Consulta enviada con exito', extra_tags="tag1")
+
+            # Usualmente cuando se completa exitosamente un formulario
+            # redirijimos al usuario a otra parte del sitio (por ejemplo al index)
+            # para que no intente enivar dos veces el mismo formulario.
+            return redirect("index2")
+    else:
+        # GET
+        form = EnviarConsultaForm()
+
+    context = {'form': form}
+
     return render(request, "cac_2023/consulta.html", context)
+
 
 def inicio(request):
     

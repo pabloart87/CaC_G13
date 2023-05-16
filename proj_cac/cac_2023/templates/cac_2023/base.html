@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,20 +6,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> {% block titulo %} {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'cac_2023/css/base.css' %}">
+    {% block extra_css %} {% endblock %} 
 </head>
 <body>
     <header>
-        {% block encabezado %} {% endblock %}   
+        <section class="mensajes">
+            {% if messages %}
+                <ul class="messages_list">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </section>
+        {% block encabezado %} {% endblock %}
     </header>
 
     <nav>
         <ul> 
             
-            <li> <a href="{% url "inicio" %}"> Home </a> </li>
-            <li> <a href="{% url "index2" %}"> Index </a> </li>
-            <li> <a href="{% url "ingresar_datos" %}"> Ingresar dato </a> </li>
-            <li> <a href="{% url "eliminar_datos" %}"> Eliminar dato </a> </li>
-            <li> <a href="{% url "consulta" %}"> Consulta </a> </li>
+            <li> <a href="{% url 'inicio' %}"> Home </a> </li>
+            <li> <a href="{% url 'index2' %}"> Index </a> </li>
+            <li> <a href="{% url 'ingresar_datos' %}"> Ingresar dato </a> </li>
+            <li> <a href="{% url 'eliminar_datos' %}"> Eliminar dato </a> </li>
+            <li> <a href="{% url 'consulta' %}"> Consulta </a> </li>
               
          </ul>
     </nav>

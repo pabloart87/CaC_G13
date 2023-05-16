@@ -1,12 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-</head>
-<body>
-    <h1>ingreso de datos</h1>
-</body>
-</html>
+{% extends "cac_2023/base.html" %}
+
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'cac_2023/css/ingreso_datos.css' %}">
+{% endblock %}
+
+{% block titulo %} ingreso de datos {% endblock %}
+
+{% block encabezado %}
+<!-- 
+ style= "color: lightblue;" align="center"> BIENVENIDO A LA PAGINA DE CONSULTA DE LOS DATOS MAREOGRAFICOS </h1> -->
+
+ <h1>BIENVENIDO A LA PAGINA DE CONSULTA DE LOS DATOS MAREOGRAFICOS </h1>
+
+{% endblock %} 
+
+{% block contenido %}
+
+<form action="{% url 'ingresar_datos' %}" method="POST">    
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit">
+    
+</form>
+
+{% endblock %} 

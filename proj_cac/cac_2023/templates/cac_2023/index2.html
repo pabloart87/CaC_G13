@@ -1,4 +1,9 @@
 {% extends "cac_2023/base.html" %}
+{% load static %}
+{% block extra_css %} 
+    <link rel="stylesheet" href="{% static 'cac_2023/css/style.css' %}">
+{% endblock %} 
+
 
 {% block titulo %}
 
@@ -7,7 +12,8 @@ index_2
 {% endblock %}
 {% block encabezado %} 
 
-<h1 style="color: blue;">HOLA {{name}} {{last_name}}! ESTOY TRABAJANDO CON DJANGO</h1>
+<!-- <h1 style="color: blue;">HOLA {{name}} {{last_name}}! ESTOY TRABAJANDO CON DJANGO</h1> -->
+<h1>HOLA {{name}} {{last_name}}! ESTOY TRABAJANDO CON DJANGO</h1>
 
 {% endblock %}
 {% block contenido %} 
@@ -21,9 +27,12 @@ index_2
         <p> Edad: {{alumn.age}}</p>
 
         {% if not alumn.valid %}
-        {% filter upper %}
+        <div id='warning'>Alerta! Este alumno no está validado aún!</div>
+        
+        <!-- {% filter upper %}
         <p style="color: red;">Alerta! Este alumno no está validado aún!</p>
-        {% endfilter %}
+        {% endfilter %} -->
+
         {% endif %}
         
     </article>
