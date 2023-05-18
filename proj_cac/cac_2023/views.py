@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import ConsultaForm
@@ -76,6 +76,8 @@ def consulta(request):
             print(consulta_form.cleaned_data["est_mar"])
             
             messages.add_message(request, messages.SUCCESS, "Consulta enviada con éxito", extra_tags="tag1")
+            
+            return redirect("inicio")
     else:
         consulta_form = ConsultaForm()
     
