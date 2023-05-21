@@ -1,4 +1,5 @@
 from django import forms 
+from django.core.exceptions import ValidationError
 
 SELECTOR_AÑOS = range(1990,2024)
 
@@ -10,6 +11,12 @@ Estaciones = [
     ("Santa_Teresita<","Santa Teresita"),
     ("Mar_del_Plata","Mar del Plata"),
     ("Puerto_Belgrano","Puerto Belgrano"),
+]
+
+TipoSensor = [
+    ("presion","Presion"),
+    ("radar","Radar"),
+    ("flotador","Flotador"),
 ]
 
 class ConsultaForm(forms.Form):
@@ -37,3 +44,47 @@ class ConsultaForm(forms.Form):
     hora_fin = forms.TimeField(label="Hora de fin", required= True)
     descr = forms.CharField(widget=forms.Textarea, label= "Describe el uso que le darás a los datos")
     
+class IngresarDatosForm(forms.Form):
+    est_mar = forms.ChoiceField(
+        label= "Estación Mareográfica",
+        required= True,
+        widget= forms.Select,
+        choices = Estaciones,        
+    ) 
+    fecha = forms.DateField(
+        label= "Fecha", 
+        required= True,
+        widget= forms.SelectDateWidget(years = SELECTOR_AÑOS),
+        )
+    hora = forms.TimeField(label="Hora", required= True)
+    marea_1 = forms.CharField(label = "Marea_1", max_length= 15)
+    marea_2 = forms.CharField(label = "Marea_2", max_length= 15)
+    marea_3 = forms.CharField(label = "Marea_3", max_length= 15)
+    int_viento = forms.CharField(label = "Intensidad de viento (Nds)", max_length= 15)
+    dir_viento = forms.CharField(label = "Dirección de viento (°)", max_length= 15)
+    
+class EliminarDatosForm(forms.Form):
+    est_mar = forms.ChoiceField(
+        label= "Estación Mareográfica",
+        required= True,
+        widget= forms.Select,
+        choices = Estaciones,        
+    ) 
+    fecha = forms.DateField(
+        label= "Fecha", 
+        required= True,
+        widget= forms.SelectDateWidget(years = SELECTOR_AÑOS),
+        )
+    hora = forms.TimeField(label="Hora", required= True)
+    
+class altaMareografoForm(forms.Form):
+    est_mar = forms.CharField(label = "Nombre de Estacion", max_length= 15, required= True)
+    tipo = forms.ChoiceField(
+        label= "Tipo de sensor",
+        required= True,
+        widget= forms.Select,
+        choices = TipoSensor,        
+    )
+    marca = forms.CharField(label = "Marca sensor", max_length= 15, required= True)
+    modelo = forms.CharField(label = "Modelo", max_length= 15, required= True)
+    s_n = forms.CharField(label = "Num de serie", max_length= 15, required= True)

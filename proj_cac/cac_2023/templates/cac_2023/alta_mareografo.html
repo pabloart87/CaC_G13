@@ -1,21 +1,18 @@
 {% extends "cac_2023/base.html" %}
 
-{% block titulo %} Ingreso de datos {% endblock %}
+{% block titulo %} Consulta Datos {% endblock %}
 
 {% block encabezado %}
-
 <h1 style= "color: lightblue;" align="center"> BIENVENIDO A LA PAGINA DE CONSULTA DE LOS DATOS MAREOGRAFICOS </h1>
-
 {% endblock %} 
 
 {% block contenido %}
 
-<h2> Desde esta página podrás ingresar datos de los mareógrafos de la Argentina </h2>
+<h2> Desde esta página podrás dar de alta un mareógrafo </h2>
 
 <form method="POST">    
     {% csrf_token %}
     {{form.as_p}}
     <input type= "submit">
 </form>
-
 {% endblock %} 
