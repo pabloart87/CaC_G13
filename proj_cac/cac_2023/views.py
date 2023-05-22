@@ -1,5 +1,7 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
+from django.views.generic.list import ListView
+
 from django.contrib import messages
 from .forms import ConsultaForm, IngresarDatosForm, EliminarDatosForm, altaMareografoForm
 from .models import Mareografo
@@ -77,7 +79,7 @@ def calcular_edad(request, edad, agno):
     documento = "<html><body><h1>En el año %s tendrás %s años"% (agno, edad_futura)
     return HttpResponse(documento) 
 
-def lista_mareografos(request):
+"""def lista_mareografos(request):
     
     context = {}
     
@@ -85,7 +87,13 @@ def lista_mareografos(request):
     
     context["lista_mareografos"] = listado
     
-    return render(request, "cac_2023/lista_mareografos.html", context)
+    return render(request, "cac_2023/lista_mareografos.html", context)"""
+
+class lista_mareografos(ListView):
+    model = Mareografo
+    context_object_name = "Mareógrafos"
+    template_name = "cac_2023/lista_mareografos.html"
+    ordering = ["nombre"]
 
 def consulta(request):
     if request.method == "POST":

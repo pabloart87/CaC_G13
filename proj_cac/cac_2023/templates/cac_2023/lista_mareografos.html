@@ -10,21 +10,21 @@ Listado de Mareógrafos
 {% endblock %}
 {% block encabezado %} 
 
-<h1>ESTOS SON LOS MAREÓGRAFOS QUE ADMINISTRAMOS</h1>
+<h1>MAREÓGRAFOS QUE SE ENCUENTRAN DADOS DE ALTA</h1>
 
 {% endblock %}
 {% block contenido %} 
 
-{% for mareografo in lista_mareografos%}
-
-    <article>
-        <p> Nombre: {{mareografo.nombre}} </p>
-        <p> Tipo de sensor: {{mareografo.tipo}} </p>
-        <p> Marca: {{mareografo.marca}} </p>
-        <p> Modelo: {{mareografo.modelo}} </p>
-        <p> Número de serie: {{mareografo.s_n}} </p>
-    </article>
-
-{% endfor %}
+<ul>
+    {% for mareografo in object_list %}
+        <li>
+            <p> Nombre: {{mareografo.nombre}} </p>
+            <p> Tipo de sensor: {{mareografo.tipo}} </p>
+            <p> Marca: {{mareografo.marca}} </p>
+            <p> Modelo: {{mareografo.modelo}} </p>
+            <p> Número de serie: {{mareografo.s_n}} </p>
+        </li>
+        {% endfor %}
+</ul>
 
 {% endblock %}
