@@ -10,6 +10,12 @@
 
 {% block contenido %}
 
-<h2> Desde esta página podrás realizar consultas de los mareógrafos de la Argentina de manera muy facil </h2>
+<h2> Desde esta página podrás eliminar datos de los mareógrafos de la Argentina </h2>
+
+<form action="{% url "eliminar_datos" %}" method="POST">    
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type= "submit">
+</form>
 
 {% endblock %} 

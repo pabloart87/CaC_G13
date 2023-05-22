@@ -1,17 +1,77 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
+from django.views.generic.list import ListView
+
+from django.contrib import messages
+from .forms import ConsultaForm, IngresarDatosForm, EliminarDatosForm, altaMareografoForm
+from .models import Mareografo
 
 # Create your views here.
 def index(request):
     return HttpResponse("hola mundo django 2023!!!")
 
+def alta_mareografo(request):
+    if request.method == "POST":
+        alta_form = altaMareografoForm(request.POST)
+        if alta_form.is_valid():
+            
+            mareografo_nuevo = Mareografo(
+                nombre = alta_form.cleaned_data["est_mar"],
+                tipo = alta_form.cleaned_data["tipo"],
+                marca = alta_form.cleaned_data["marca"],
+                modelo = alta_form.cleaned_data["modelo"],
+                s_n = alta_form.cleaned_data["s_n"],
+            )
+            
+            mareografo_nuevo.save()
+            
+            messages.add_message(request, messages.SUCCESS, "Mareógrafo dado de alta exitosamente", extra_tags="tag1")
+            
+            return redirect("inicio")
+    else:
+        alta_form = altaMareografoForm()
+    
+    context = {"form": alta_form}
+        
+    return render(request, "cac_2023/ingreso_datos.html", context)
+
 def ingreso_datos(request):
-    context = {}
+    if request.method == "POST":
+        ingreso_form = IngresarDatosForm(request.POST)
+        if ingreso_form.is_valid():
+            
+            #print("-----------------")
+            #print(consulta_form.cleaned_data["mail"])
+            #print(consulta_form.cleaned_data["est_mar"])
+            
+            messages.add_message(request, messages.SUCCESS, "Ingreso de dato exitoso", extra_tags="tag1")
+            
+            return redirect("inicio")
+    else:
+        ingreso_form = IngresarDatosForm()
+    
+    context = {"form": ingreso_form}
+        
     return render(request, "cac_2023/ingreso_datos.html", context)
 
 def eliminar_datos(request):
-    context = {}
-    return render(request, "cac_2023/eliminar_datos.html", context)
+    if request.method == "POST":
+        eliminar_form = EliminarDatosForm(request.POST)
+        if eliminar_form.is_valid():
+            
+            #print("-----------------")
+            #print(consulta_form.cleaned_data["mail"])
+            #print(consulta_form.cleaned_data["est_mar"])
+            
+            messages.add_message(request, messages.SUCCESS, "Se eliminó el dato exitosamente", extra_tags="tag1")
+            
+            return redirect("inicio")
+    else:
+        eliminar_form = EliminarDatosForm()
+    
+    context = {"form": eliminar_form}
+        
+    return render(request, "cac_2023/ingreso_datos.html", context)
 
 def calcular_edad(request, edad, agno):
     periodo = agno - 2023
@@ -19,55 +79,39 @@ def calcular_edad(request, edad, agno):
     documento = "<html><body><h1>En el año %s tendrás %s años"% (agno, edad_futura)
     return HttpResponse(documento) 
 
-def index2(request):
-    
-    alumno_ficticio = {
-        "name" : "Bianca",
-        "last_name" : "Concatti",
-        "age" : 26,
-        "valid" : False
-    }
-    
-    listado_alumnos = [ 
-    {
-        "name" : "Bianca",
-        "last_name" : "Concatti",
-        "age" : 26,
-        "valid" : False
-    },
-    {
-        "name" : "Martin",
-        "last_name" : "El martu",
-        "age" : 26,
-        "valid" : False
-    },
-    {
-        "name" : "Cheba",
-        "last_name" : "El pancho",
-        "age" : 26,
-        "valid" : False
-    },
-    {
-        "name" : "La",
-        "last_name" : "Lola",
-        "age" : 26,
-        "valid" : False
-    },
-    ]
-    
-    context = {
-        "name": "Pablo",
-        "last_name": "Toledo",
-        "alumn": alumno_ficticio,
-        "listado_alumnos": listado_alumnos
-        }
-    
-    return render(request, "cac_2023/index2.html", context)
-
-def consulta(request):
+"""def lista_mareografos(request):
     
     context = {}
     
+    listado = Mareografo.objects.all()
+    
+    context["lista_mareografos"] = listado
+    
+    return render(request, "cac_2023/lista_mareografos.html", context)"""
+
+class lista_mareografos(ListView):
+    model = Mareografo
+    context_object_name = "Mareógrafos"
+    template_name = "cac_2023/lista_mareografos.html"
+    ordering = ["nombre"]
+
+def consulta(request):
+    if request.method == "POST":
+        consulta_form = ConsultaForm(request.POST)
+        if consulta_form.is_valid():
+            
+            print("-----------------")
+            print(consulta_form.cleaned_data["mail"])
+            print(consulta_form.cleaned_data["est_mar"])
+            
+            messages.add_message(request, messages.SUCCESS, "Consulta enviada con éxito", extra_tags="tag1")
+            
+            return redirect("inicio")
+    else:
+        consulta_form = ConsultaForm()
+    
+    context = {"form": consulta_form}
+        
     return render(request, "cac_2023/consulta.html", context)
 
 def inicio(request):

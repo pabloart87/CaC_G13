@@ -1,0 +1,30 @@
+{% extends "cac_2023/base.html" %}
+{% load static %}
+
+{% block extra_css %}     {% endblock %}
+
+{% block titulo %}
+
+Listado de Mareógrafos
+
+{% endblock %}
+{% block encabezado %} 
+
+<h1>MAREÓGRAFOS QUE SE ENCUENTRAN DADOS DE ALTA</h1>
+
+{% endblock %}
+{% block contenido %} 
+
+<ul>
+    {% for mareografo in object_list %}
+        <li>
+            <p> Nombre: {{mareografo.nombre}} </p>
+            <p> Tipo de sensor: {{mareografo.tipo}} </p>
+            <p> Marca: {{mareografo.marca}} </p>
+            <p> Modelo: {{mareografo.modelo}} </p>
+            <p> Número de serie: {{mareografo.s_n}} </p>
+        </li>
+        {% endfor %}
+</ul>
+
+{% endblock %}
