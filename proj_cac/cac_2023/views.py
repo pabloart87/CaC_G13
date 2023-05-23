@@ -67,6 +67,7 @@ def calcular_edad(request, edad, agno):
     documento = "<html><body><h1>En el año %s tendrás %s años"% (agno, edad_futura)
     return HttpResponse(documento) 
 
+
 """def lista_mareografos(request):
     
     context = {}
@@ -74,7 +75,6 @@ def calcular_edad(request, edad, agno):
     listado = Mareografo.objects.all()
     
     context["lista_mareografos"] = listado
-    
     return render(request, "cac_2023/lista_mareografos.html", context)"""
 
 class lista_mareografos(ListView):
@@ -96,9 +96,9 @@ def consulta(request):
         consulta_form = ConsultaForm()
     
     context = {"form": consulta_form}
-        
-    return render(request, "cac_2023/consulta.html", context)
 
+    return render(request, "cac_2023/consulta.html", context)
+    
 def inicio(request):
     
     context = {}
