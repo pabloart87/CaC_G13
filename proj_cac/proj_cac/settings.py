@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'proj_cac.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db_mareografos',
+        'NAME': 'cac2023',
         'USER': 'postgres',
-        'PASSWORD': 'Pablo33120!',
+        'PASSWORD': 'admin',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -120,7 +120,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+#El debug true, buscar un directorio static dentro del proyecto
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static'
+# ]
+
+#esto se genera en producción y es la que deberemos 
+#crear y django ira a buscar ahi 
+#python manage.py collectstatic
+#STATIC_ROOT = BASE_DIR / 'static_root'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

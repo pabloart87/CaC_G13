@@ -1,15 +1,25 @@
 {% extends "cac_2023/base.html" %}
 
-{% block titulo %} Consulta Datos {% endblock %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'cac_2023/css/datos.css' %}">
+{% endblock %}
+
+{% block titulo %} Consultar {% endblock %}
 
 {% block encabezado %}
-<h1 style= "color: lightblue;" align="center"> BIENVENIDO A LA PAGINA DE CONSULTA DE LOS DATOS MAREOGRAFICOS </h1>
-{% endblock %} 
+
+<h1>CONSULTAS</h1>
+<h3>Háganos saber su consulta y nos pondremos en contacto a la brevedad.</h3>
+
+{% endblock %}
 
 {% block contenido %}
+
 <form method="POST">    
     {% csrf_token %}
     {{form.as_p}}
     <input type= "submit">
 </form>
-{% endblock %} 
+{% endblock %}

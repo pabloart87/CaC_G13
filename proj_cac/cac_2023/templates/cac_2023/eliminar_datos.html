@@ -1,16 +1,27 @@
 {% extends "cac_2023/base.html" %}
 
-{% block titulo %} elim datos {% endblock %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'cac_2023/css/datos.css' %}">
+{% endblock %}
+
+{% block titulo %} Eliminar {% endblock %}
 
 {% block encabezado %}
 
-<h1 style= "color: lightblue;" align="center"> BIENVENIDO A LA PAGINA DE CONSULTA DE LOS DATOS MAREOGRAFICOS </h1>
+ <h1>ELIMINAR DATOS</h1>
+ <h3> Desde esta página podrás eliminar datos de los mareógrafos de la Argentina. </h3>
 
 {% endblock %} 
 
 {% block contenido %}
 
-<h2> Desde esta página podrás eliminar datos de los mareógrafos de la Argentina </h2>
+<form action="{% url 'eliminar_datos' %}" method="POST">    
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type= "submit">
+</form>
 
 <form action="{% url "eliminar_datos" %}" method="POST">    
     {% csrf_token %}

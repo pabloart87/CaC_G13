@@ -42,7 +42,8 @@ class ConsultaForm(forms.Form):
         widget= forms.SelectDateWidget(years = SELECTOR_AÑOS),
         )
     hora_fin = forms.TimeField(label="Hora de fin", required= True)
-    descr = forms.CharField(widget=forms.Textarea, label= "Describe el uso que le darás a los datos")
+    
+    Descripción = forms.CharField(widget=forms.Textarea(attrs={"placeholder": "Describe el uso que le darás a los datos...","rows":5, "cols":50}),)
     
 class IngresarDatosForm(forms.Form):
     est_mar = forms.ChoiceField(
@@ -88,3 +89,4 @@ class altaMareografoForm(forms.Form):
     marca = forms.CharField(label = "Marca sensor", max_length= 15, required= True)
     modelo = forms.CharField(label = "Modelo", max_length= 15, required= True)
     s_n = forms.CharField(label = "Num de serie", max_length= 15, required= True)
+    
