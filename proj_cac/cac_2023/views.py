@@ -6,10 +6,6 @@ from django.contrib import messages
 from .forms import ConsultaForm, IngresarDatosForm, EliminarDatosForm, altaMareografoForm
 from .models import Mareografo
 
-# Create your views here.
-def index(request):
-    return HttpResponse("hola mundo django 2023!!!")
-
 def alta_mareografo(request):
     if request.method == "POST":
         alta_form = altaMareografoForm(request.POST)
@@ -33,17 +29,13 @@ def alta_mareografo(request):
     
     context = {"form": alta_form}
         
-    return render(request, "cac_2023/ingreso_datos.html", context)
+    return render(request, "cac_2023/alta_mareografo.html", context)
 
 def ingreso_datos(request):
     if request.method == "POST":
         ingreso_form = IngresarDatosForm(request.POST)
         if ingreso_form.is_valid():
-            
-            #print("-----------------")
-            #print(consulta_form.cleaned_data["mail"])
-            #print(consulta_form.cleaned_data["est_mar"])
-            
+                        
             messages.add_message(request, messages.SUCCESS, "Ingreso de dato exitoso", extra_tags="tag1")
             
             return redirect("inicio")
@@ -58,11 +50,7 @@ def eliminar_datos(request):
     if request.method == "POST":
         eliminar_form = EliminarDatosForm(request.POST)
         if eliminar_form.is_valid():
-            
-            #print("-----------------")
-            #print(consulta_form.cleaned_data["mail"])
-            #print(consulta_form.cleaned_data["est_mar"])
-            
+                       
             messages.add_message(request, messages.SUCCESS, "Se eliminó el dato exitosamente", extra_tags="tag1")
             
             return redirect("inicio")
@@ -71,13 +59,14 @@ def eliminar_datos(request):
     
     context = {"form": eliminar_form}
         
-    return render(request, "cac_2023/ingreso_datos.html", context)
+    return render(request, "cac_2023/eliminar_datos.html", context)
 
 def calcular_edad(request, edad, agno):
     periodo = agno - 2023
     edad_futura = edad + periodo
     documento = "<html><body><h1>En el año %s tendrás %s años"% (agno, edad_futura)
     return HttpResponse(documento) 
+
 
 """def lista_mareografos(request):
     
@@ -86,7 +75,6 @@ def calcular_edad(request, edad, agno):
     listado = Mareografo.objects.all()
     
     context["lista_mareografos"] = listado
-    
     return render(request, "cac_2023/lista_mareografos.html", context)"""
 
 class lista_mareografos(ListView):
@@ -100,9 +88,6 @@ def consulta(request):
         consulta_form = ConsultaForm(request.POST)
         if consulta_form.is_valid():
             
-            print("-----------------")
-            print(consulta_form.cleaned_data["mail"])
-            print(consulta_form.cleaned_data["est_mar"])
             
             messages.add_message(request, messages.SUCCESS, "Consulta enviada con éxito", extra_tags="tag1")
             
@@ -111,11 +96,11 @@ def consulta(request):
         consulta_form = ConsultaForm()
     
     context = {"form": consulta_form}
-        
-    return render(request, "cac_2023/consulta.html", context)
 
+    return render(request, "cac_2023/consulta.html", context)
+    
 def inicio(request):
     
     context = {}
     
-    return render(request, "cac_2023/inicio.html", context )
+    return render(request, "cac_2023/index.html", context )

@@ -1,0 +1,139 @@
+{% extends "cac_2023/base.html" %}
+{% load static %}
+
+{% block titulo %} inicio {% endblock %}
+
+{% block encabezado %}
+
+
+        <header class="masthead">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-white">
+
+                            <h1 class="mb-5">BIENVENIDO A LA PAGINA DE CONSULTA DE LOS DATOS MAREOGRAFICOS</h1>
+
+                            <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
+
+                                <div class="row">
+                                    <div class="col">
+                                        <input class="form-control form-control-lg" id="emailAddress" type="email" placeholder="Email Address" data-sb-validations="required,email" />
+                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">Dirección de correo requerida.</div>
+                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:email">Dirección de correo inválida.</div>
+                                    </div>
+                                    <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Enviar</button></div>
+                                </div>
+
+                                <div class="d-none" id="submitSuccessMessage">
+                                    <div class="text-center mb-3">
+                                        <div class="fw-bolder">Registro correcto</div>
+                                        <p>Registrate con tu correo</p>
+                                        <a class="text-white" href="#">registrate</a>
+                                    </div>
+                                </div>
+
+                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+{% endblock %} 
+
+{% block contenido %}
+
+<h2> Desde esta página podrás realizar consultas de los mareógrafos de la Argentina de manera muy fácil </h2>
+
+        <section class="features-icons bg-light text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi bi-water m-auto text-primary"></i></div>
+                            <h3>Tablas de marea</h3>
+                            <p class="lead mb-0">Predicciones de Pleamares y Bajamares.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi bi-geo-alt m-auto text-primary"></i></div>
+                            <h3>Estaciones mareográficas</h3>
+                            <p class="lead mb-0">Ubicación de las Estaciones Mareográficas</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi bi-tsunami m-auto text-primary"></i></div>
+                            <h3>Pronóstico</h3>
+                            <p class="lead mb-0"> Pronóstico de Olas para el Río de la Plata</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="showcase">
+            <div class="container-fluid p-0">
+                <div class="row g-0">
+                    <div class="col-lg-6 order-lg-2 text-white showcase-img" >
+                        <iframe src="https://www.google.com/maps/d/embed?mid=16q9-cSXmMEiPiXtx0FRkp3QadU4XkO3o&ehbc=2E312F" width="640" height="480"></iframe>
+                    </div>
+                    
+                    <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                        <h2>Estaciones mareográficas</h2>
+                        <p class="lead mb-0">Las estaciones mareográficas y los hidrómetros son instrumentos de medición para la altura de los ríos. Las mismas se cosignan en metros, y cumplen la misión de informar a los navegantes sobre las posibilidades de navegación. Para ello quien navega deberá conocer la profundidad al cero (que es la correspondiente con una altura del río igual a cero) y sumarle la que indique el mareógrafo/hidrómetro, obteniendo así la profundidad efectiva.
+
+                            El siguiente mapa indica la ubicación de cada una, y detalla en cada estación la última altura disponible.</p>
+                    </div>
+                </div>
+                <div class="row g-0">
+                    <div class="col-lg-6 text-white showcase-img" ><img src="{% static 'cac_2023/assets/img/mg1.jpg' %}"></div>
+                    <div class="col-lg-6 my-auto showcase-text">
+                        <h2>Gráfico del Río de la Plata</h2>
+                        <p class="lead mb-0">Newly improved, and full of great utility classes, Bootstrap 5 is leading the way in mobile responsive web development! All of the themes on Start Bootstrap are now using Bootstrap 5!</p>
+                    </div>
+                </div>
+                <div class="row g-0">
+                    <div class="col-lg-6 order-lg-2 text-white showcase-img"><img src="{% static 'cac_2023/assets/img/mg2.jpg' %}"></div>
+                    <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                        <h2>Gráfico Litoral Atlántico y Antártida</h2>
+                        <p class="lead mb-0">Landing Page is just HTML and CSS with a splash of SCSS for users who demand some deeper customization options. Out of the box, just add your content and images, and your new landing page will be ready to go!</p>
+                    </div>
+                </div>
+            </div>
+
+        <section class="call-to-action text-white text-center" id="signup">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <h2 class="mb-4">Reciba más información</h2>
+
+                        <form class="form-subscribe" id="contactFormFooter" data-sb-form-api-token="API_TOKEN">
+
+                            <div class="row">
+                                <div class="col">
+                                    <input class="form-control form-control-lg" id="emailAddressBelow" type="email" placeholder="Email Address" data-sb-validations="required,email" />
+                                    <div class="invalid-feedback text-white" data-sb-feedback="emailAddressBelow:required">Dirección de correo requerida.</div>
+                                    <div class="invalid-feedback text-white" data-sb-feedback="emailAddressBelow:email">Dirección de correo inválida.</div>
+                                </div>
+                                <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Enviar</button></div>
+                            </div>
+
+                            <div class="d-none" id="submitSuccessMessage">
+                                <div class="text-center mb-3">
+                                    <div class="fw-bolder">Registro correcto</div>
+                                    <p>Activar formulario</p>
+                                    <a class="text-white" href="#">formulario</a>
+                                </div>
+                            </div>
+
+                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %} 

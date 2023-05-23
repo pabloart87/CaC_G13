@@ -1,18 +1,20 @@
 {% extends "cac_2023/base.html" %}
+
 {% load static %}
 
-{% block extra_css %}     {% endblock %}
-
-{% block titulo %}
-
-Listado de Mareógrafos
-
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'cac_2023/css/datos.css' %}">
 {% endblock %}
+
+{% block titulo %} Lista de mareografos {% endblock %}
+
 {% block encabezado %} 
 
 <h1>MAREÓGRAFOS QUE SE ENCUENTRAN DADOS DE ALTA</h1>
+<h3> Listado de mareógrafos:</h3>
 
 {% endblock %}
+
 {% block contenido %} 
 
 <ul>

@@ -1,18 +1,26 @@
 {% extends "cac_2023/base.html" %}
 
-{% block titulo %} Consulta Datos {% endblock %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'cac_2023/css/datos.css' %}">
+{% endblock %}
+
+{% block titulo %} Alta de mareografos {% endblock %}
 
 {% block encabezado %}
-<h1 style= "color: lightblue;" align="center"> BIENVENIDO A LA PAGINA DE CONSULTA DE LOS DATOS MAREOGRAFICOS </h1>
+
+<h1> ALTA DE MAREÓGRAFOS  </h1>
+<h2> Desde esta página podrás dar de alta un mareógrafo. </h2>
+
 {% endblock %} 
 
 {% block contenido %}
-
-<h2> Desde esta página podrás dar de alta un mareógrafo </h2>
 
 <form method="POST">    
     {% csrf_token %}
     {{form.as_p}}
     <input type= "submit">
 </form>
+
 {% endblock %} 
