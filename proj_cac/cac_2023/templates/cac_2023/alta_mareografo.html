@@ -6,18 +6,18 @@
     <link rel="stylesheet" href="{% static 'cac_2023/css/datos.css' %}">
 {% endblock %}
 
-{% block titulo %} Eliminar {% endblock %}
+{% block titulo %} Alta de mareografos {% endblock %}
 
 {% block encabezado %}
 
- <h1>ELIMINAR DATOS</h1>
- <h3> Desde esta página podrás eliminar datos de los mareógrafos de la Argentina. </h3>
+<h1> ALTA DE MAREÓGRAFOS  </h1>
+<h2> Desde esta página podrás dar de alta un mareógrafo. </h2>
 
 {% endblock %} 
 
 {% block contenido %}
 
-<form action="{% url 'eliminar_datos' %}" method="POST">    
+<form method="POST">    
     {% csrf_token %}
     {{form.as_p}}
     <input type= "submit">

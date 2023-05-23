@@ -3,26 +3,24 @@
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'cac_2023/css/ingreso_datos.css' %}">
+    <link rel="stylesheet" href="{% static 'cac_2023/css/datos.css' %}">
 {% endblock %}
 
-{% block titulo %} ingreso de datos {% endblock %}
+{% block titulo %} Ingresar {% endblock %}
 
 {% block encabezado %}
-<!-- 
- style= "color: lightblue;" align="center"> BIENVENIDO A LA PAGINA DE CONSULTA DE LOS DATOS MAREOGRAFICOS </h1> -->
 
- <h1>BIENVENIDO A LA PAGINA DE CONSULTA DE LOS DATOS MAREOGRAFICOS </h1>
+ <h1>INGRESO DE DATOS </h1>
+ <h3> Desde esta página podrás ingresar datos de los mareógrafos de la Argentina. </h3>
 
 {% endblock %} 
 
 {% block contenido %}
 
-<form action="{% url 'ingresar_datos' %}" method="POST">    
+<form method="POST">    
     {% csrf_token %}
     {{form.as_p}}
-    <input type="submit">
-    
+    <input type= "submit">
 </form>
 
 {% endblock %} 

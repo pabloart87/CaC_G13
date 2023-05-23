@@ -1,35 +1,64 @@
-from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from .forms import AltaUsuarioForm, EnviarConsultaForm
+from django.views.generic.list import ListView
 
-# Create your views here.
-def index(request):
-    return HttpResponse("hola mundo django 2023!!!")
+from django.contrib import messages
+from .forms import ConsultaForm, IngresarDatosForm, EliminarDatosForm, altaMareografoForm
+from .models import Mareografo
 
-# def ingreso_datos(request):
-#     context = {}
-#     return render(request, "cac_2023/ingreso_datos.html", context)
+def alta_mareografo(request):
+    if request.method == "POST":
+        alta_form = altaMareografoForm(request.POST)
+        if alta_form.is_valid():
+            
+            mareografo_nuevo = Mareografo(
+                nombre = alta_form.cleaned_data["est_mar"],
+                tipo = alta_form.cleaned_data["tipo"],
+                marca = alta_form.cleaned_data["marca"],
+                modelo = alta_form.cleaned_data["modelo"],
+                s_n = alta_form.cleaned_data["s_n"],
+            )
+            
+            mareografo_nuevo.save()
+            
+            messages.add_message(request, messages.SUCCESS, "Mareógrafo dado de alta exitosamente", extra_tags="tag1")
+            
+            return redirect("inicio")
+    else:
+        alta_form = altaMareografoForm()
+    
+    context = {"form": alta_form}
+        
+    return render(request, "cac_2023/alta_mareografo.html", context)
 
 def ingreso_datos(request):
-
     if request.method == "POST":
-
-        alta_usuario_form = AltaUsuarioForm(request.POST)
-
+        ingreso_form = IngresarDatosForm(request.POST)
+        if ingreso_form.is_valid():
+                        
+            messages.add_message(request, messages.SUCCESS, "Ingreso de dato exitoso", extra_tags="tag1")
+            
+            return redirect("inicio")
     else:
-
-        alta_usuario_form = AltaUsuarioForm()
-
-    context = {
-        'form' : alta_usuario_form
-        }
+        ingreso_form = IngresarDatosForm()
     
+    context = {"form": ingreso_form}
+        
     return render(request, "cac_2023/ingreso_datos.html", context)
 
-
 def eliminar_datos(request):
-    context = {}
+    if request.method == "POST":
+        eliminar_form = EliminarDatosForm(request.POST)
+        if eliminar_form.is_valid():
+                       
+            messages.add_message(request, messages.SUCCESS, "Se eliminó el dato exitosamente", extra_tags="tag1")
+            
+            return redirect("inicio")
+    else:
+        eliminar_form = EliminarDatosForm()
+    
+    context = {"form": eliminar_form}
+        
     return render(request, "cac_2023/eliminar_datos.html", context)
 
 def calcular_edad(request, edad, agno):
@@ -38,76 +67,40 @@ def calcular_edad(request, edad, agno):
     documento = "<html><body><h1>En el año %s tendrás %s años"% (agno, edad_futura)
     return HttpResponse(documento) 
 
-def index2(request):
+"""def lista_mareografos(request):
     
-    alumno_ficticio = {
-        "name" : "Bianca",
-        "last_name" : "Concatti",
-        "age" : 26,
-        "valid" : False
-    }
+    context = {}
     
-    listado_alumnos = [ 
-    {
-        "name" : "Bianca",
-        "last_name" : "Concatti",
-        "age" : 26,
-        "valid" : False
-    },
-    {
-        "name" : "Martin",
-        "last_name" : "El martu",
-        "age" : 26,
-        "valid" : False
-    },
-    {
-        "name" : "Cheba",
-        "last_name" : "El pancho",
-        "age" : 26,
-        "valid" : False
-    },
-    {
-        "name" : "La",
-        "last_name" : "Lola",
-        "age" : 26,
-        "valid" : False
-    },
-    ]
+    listado = Mareografo.objects.all()
     
-    context = {
-        "name": "Pablo",
-        "last_name": "Toledo",
-        "alumn": alumno_ficticio,
-        "listado_alumnos": listado_alumnos
-        }
+    context["lista_mareografos"] = listado
     
-    return render(request, "cac_2023/index2.html", context)
+    return render(request, "cac_2023/lista_mareografos.html", context)"""
+
+class lista_mareografos(ListView):
+    model = Mareografo
+    context_object_name = "Mareógrafos"
+    template_name = "cac_2023/lista_mareografos.html"
+    ordering = ["nombre"]
 
 def consulta(request):
-
     if request.method == "POST":
-        form = EnviarConsultaForm(request.POST)
-        if form.is_valid():
-            print("------------------------")
-            print(form.cleaned_data['mail'])
-
-            messages.add_message(request, messages.SUCCESS, 'Consulta enviada con exito', extra_tags="tag1")
-
-            # Usualmente cuando se completa exitosamente un formulario
-            # redirijimos al usuario a otra parte del sitio (por ejemplo al index)
-            # para que no intente enivar dos veces el mismo formulario.
-            return redirect("index2")
+        consulta_form = ConsultaForm(request.POST)
+        if consulta_form.is_valid():
+            
+            
+            messages.add_message(request, messages.SUCCESS, "Consulta enviada con éxito", extra_tags="tag1")
+            
+            return redirect("inicio")
     else:
-        # GET
-        form = EnviarConsultaForm()
-
-    context = {'form': form}
-
+        consulta_form = ConsultaForm()
+    
+    context = {"form": consulta_form}
+        
     return render(request, "cac_2023/consulta.html", context)
-
 
 def inicio(request):
     
     context = {}
     
-    return render(request, "cac_2023/inicio.html", context )
+    return render(request, "cac_2023/index.html", context )

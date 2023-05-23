@@ -1,85 +1,26 @@
-
 {% extends "cac_2023/base.html" %}
 
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'cac_2023/css/ingreso_datos.css' %}">
+    <link rel="stylesheet" href="{% static 'cac_2023/css/datos.css' %}">
 {% endblock %}
 
-{% block titulo %}Envianos tu consulta{% endblock %}
+{% block titulo %} Consultar {% endblock %}
 
 {% block encabezado %}
-<h1>Envianos tu consulta</h1>
-<h2>Nos pondremos en contacto a la brevedad</h2>
+
+<h1>CONSULTAS</h1>
+<h3>Háganos saber su consulta y nos pondremos en contacto a la brevedad.</h3>
+
 {% endblock %}
 
 {% block contenido %}
-<form action="{% url 'consulta' %}" method="POST">
+
+<form method="POST">    
     {% csrf_token %}
-    {{form}}
-    <input type="submit">
+    {{form.as_p}}
+    <input type= "submit">
 </form>
 
 {% endblock %}
-
-
-
-
-<!-- 
-
-
-{% block titulo1 %} Consulta Datos {% endblock %}
-
-{% block encabezado1 %}
-
-<h1> envianos tu consulta </h1>
-
-{% endblock %} 
-
-{% block contenido1 %}
-
-<form action="" method="post" id="formulario">    
-    <h2 class="titulo_form">COMPLETE LOS CAMPOS PARA REALIZAR UNA CONSULTA</h2>
-    
-    <label for="nombre">Nombre y apellido:</label>
-    <input class="input" type="text" id="nombre" required/><br><br>
-
-    <label for="email">E-mail:</label>
-    <input class="input" type="email" id="email" name="email" required/><br><br>
-
-    <label for="telefono">Teléfono:</label>
-    <input class="input" type="integer" id="telefono" name="telefono" required/><br><br>
-
-    <label for="estacion_mareografica">Estación Mareográfica: </label>
-    <select name="estacion">
-        <option>San Fernando</option>
-        <option>Palermo</option>
-        <option>La Plata</option>
-        <option>Atalaya</option>
-        <option>Santa Teresita</option>
-        <option>Mar del Plata</option>
-        <option>Puerto Belgrano</option>
-    </select><br><br>    
-
-    <label for="fechas">Seleccione fecha de inicio: </label><br><br>
-    <date name="fecha inicio">
-
-    <label for="message">Describa el uso que le dará a los datos solicitados</label><br>
-    <textarea name="message" rows="10" cols="50" required/>Describa el uso que le dará a los datos solicitados</textarea><br><br>
-
-    <input type="checkbox" id="subscription" name="subscription" value="subscription">
-    <label for="subscription">Quiero recibir novedades a mi mail</label><br><br>
-
-    <button class="submit" type="submit" onclick="return EnviarFormulario()" id="boton">Enviar</button>
-    <input type="Reset" value="Borrar todo">
-
-
-    <input class="submit" type="submit" onClick="return EnviarFormulario()" value="Enviar" id="boton">  
-
-    <div id="error"></div>
-    <div id="enviado"></div>
-
-</form> 
-
- {% endblock %}  -->

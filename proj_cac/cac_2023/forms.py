@@ -1,55 +1,92 @@
-from django import forms
+from django import forms 
+from django.core.exceptions import ValidationError
 
-BIRTH_YEAR_CHOICES = range(1980,2006)
-TYPE_CHOICES = [
-    ("General", "General"),
-    ("Diploma_tramite", "Diploma en tramite"),
-    ("Otros", "Otros"),
+SELECTOR_AÑOS = range(1990,2024)
+
+Estaciones = [
+    ("San_Fernando","San Fernando"),
+    ("Palermo","Palermo"),
+    ("La_Plata","La Plata"),
+    ("Atalaya","Atalaya"),
+    ("Santa_Teresita<","Santa Teresita"),
+    ("Mar_del_Plata","Mar del Plata"),
+    ("Puerto_Belgrano","Puerto Belgrano"),
 ]
 
-class AltaUsuarioForm(forms.Form):
-    nombre = forms.CharField(label="nombre alumno",widget=forms.TextInput(attrs={'class': 'nombre_usuario letra'}), required=True)
-    apellido = forms.CharField(label="apellido alumno", required=True)
-    mail = forms.EmailField(required=True)
+TipoSensor = [
+    ("presion","Presion"),
+    ("radar","Radar"),
+    ("flotador","Flotador"),
+]
 
-class EnviarConsultaForm(forms.Form):
-    mail = forms.EmailField(label="Mail", required=True)
-    # tipo = forms.MultipleChoiceField(
-    #     widget=forms.Select,
-    #     choices=TYPE_CHOICES,
-    # )
-
-    # fecha_ingreso = forms.DateField(
-    #     widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES)
-    # )
-
-    # Campo Fecha con date picker en el chrome.
-    fecha = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+class ConsultaForm(forms.Form):
+    nombre = forms.CharField(label = "Nombre", max_length= 15, required= True)
+    apellido = forms.CharField(label = "Apellido", max_length= 15, required= True)
+    mail = forms.EmailField(label = "Email", required= True)
+    #telefono = 
+    est_mar = forms.ChoiceField(
+        label= "Estación Mareográfica",
+        required= True,
+        widget= forms.Select,
+        choices = Estaciones,        
+    ) 
+    fecha_ini = forms.DateField(
+        label= "Fecha de inicio", 
+        required= True,
+        widget= forms.SelectDateWidget(years = SELECTOR_AÑOS),
+        )
+    hora_ini = forms.TimeField(label="Hora de inicio", required= True)
+    fecha_fin = forms.DateField(
+        label= "Fecha fin", 
+        required= True,
+        widget= forms.SelectDateWidget(years = SELECTOR_AÑOS),
+        )
+    hora_fin = forms.TimeField(label="Hora de fin", required= True)
     
-    mensaje = forms.CharField(widget=forms.Textarea)
-
-    def clean_mail(self):
-        # Validación del campo Mail
-
-        # Para mas detalle
-        # https://docs.djangoproject.com/en/4.2/ref/forms/validation/
-
-        # aqui podemos poner la logica de negocio necesaria para 
-        # efectivamente validar si por ejemplo el campo mail es valido
-        # o no.
-
-        # Si es valido se devuelve la info, caso contrario se lanza 
-        # un ValidationError.
-
-        # Pueden cambiar la logica del if para probar ambos casos.
-
-        data = self.cleaned_data["mail"]
-        # if True:
-        #     raise ValidationError("El mail utilizado ya existe")
-
-        # Always return a value to use as the new cleaned data, even if
-        # this method didn't change it.
-        return data
-
-    def clean(self):
-        pass
+    Descripción = forms.CharField(widget=forms.Textarea(attrs={"placeholder": "Describe el uso que le darás a los datos...","rows":5, "cols":50}),)
+    
+class IngresarDatosForm(forms.Form):
+    est_mar = forms.ChoiceField(
+        label= "Estación Mareográfica",
+        required= True,
+        widget= forms.Select,
+        choices = Estaciones,        
+    ) 
+    fecha = forms.DateField(
+        label= "Fecha", 
+        required= True,
+        widget= forms.SelectDateWidget(years = SELECTOR_AÑOS),
+        )
+    hora = forms.TimeField(label="Hora", required= True)
+    marea_1 = forms.CharField(label = "Marea_1", max_length= 15)
+    marea_2 = forms.CharField(label = "Marea_2", max_length= 15)
+    marea_3 = forms.CharField(label = "Marea_3", max_length= 15)
+    int_viento = forms.CharField(label = "Intensidad de viento (Nds)", max_length= 15)
+    dir_viento = forms.CharField(label = "Dirección de viento (°)", max_length= 15)
+    
+class EliminarDatosForm(forms.Form):
+    est_mar = forms.ChoiceField(
+        label= "Estación Mareográfica",
+        required= True,
+        widget= forms.Select,
+        choices = Estaciones,        
+    ) 
+    fecha = forms.DateField(
+        label= "Fecha", 
+        required= True,
+        widget= forms.SelectDateWidget(years = SELECTOR_AÑOS),
+        )
+    hora = forms.TimeField(label="Hora", required= True)
+    
+class altaMareografoForm(forms.Form):
+    est_mar = forms.CharField(label = "Nombre de Estacion", max_length= 15, required= True)
+    tipo = forms.ChoiceField(
+        label= "Tipo de sensor",
+        required= True,
+        widget= forms.Select,
+        choices = TipoSensor,        
+    )
+    marca = forms.CharField(label = "Marca sensor", max_length= 15, required= True)
+    modelo = forms.CharField(label = "Modelo", max_length= 15, required= True)
+    s_n = forms.CharField(label = "Num de serie", max_length= 15, required= True)
+    
