@@ -1,11 +1,14 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.views.generic.list import ListView
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
 from .forms import ConsultaForm, IngresarDatosForm, EliminarDatosForm, altaMareografoForm
 from .models import Mareografo
 
+@login_required
 def alta_mareografo(request):
     if request.method == "POST":
         alta_form = altaMareografoForm(request.POST)
@@ -31,6 +34,7 @@ def alta_mareografo(request):
         
     return render(request, "cac_2023/alta_mareografo.html", context)
 
+@login_required
 def ingreso_datos(request):
     if request.method == "POST":
         ingreso_form = IngresarDatosForm(request.POST)
@@ -46,6 +50,7 @@ def ingreso_datos(request):
         
     return render(request, "cac_2023/ingreso_datos.html", context)
 
+@login_required
 def eliminar_datos(request):
     if request.method == "POST":
         eliminar_form = EliminarDatosForm(request.POST)
@@ -61,11 +66,11 @@ def eliminar_datos(request):
         
     return render(request, "cac_2023/eliminar_datos.html", context)
 
-def calcular_edad(request, edad, agno):
-    periodo = agno - 2023
-    edad_futura = edad + periodo
-    documento = "<html><body><h1>En el año %s tendrás %s años"% (agno, edad_futura)
-    return HttpResponse(documento) 
+# def calcular_edad(request, edad, agno):
+#     periodo = agno - 2023
+#     edad_futura = edad + periodo
+#     documento = "<html><body><h1>En el año %s tendrás %s años"% (agno, edad_futura)
+#     return HttpResponse(documento) 
 
 
 """def lista_mareografos(request):
@@ -82,6 +87,7 @@ class lista_mareografos(ListView):
     context_object_name = "Mareógrafos"
     template_name = "cac_2023/lista_mareografos.html"
     ordering = ["nombre"]
+
 
 def consulta(request):
     if request.method == "POST":
@@ -104,3 +110,9 @@ def inicio(request):
     context = {}
     
     return render(request, "cac_2023/index.html", context )
+
+def login(request):
+    
+    context = {}
+    
+    return render(request, "cac_2023/login.html", context )
