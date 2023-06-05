@@ -2,6 +2,7 @@ from django import forms
 from .models import Mareografo, Detalle_mareog
 from django.core.exceptions import ValidationError
 
+
 SELECTOR_AÑOS = range(1990,2024)
 
 Estaciones = [
