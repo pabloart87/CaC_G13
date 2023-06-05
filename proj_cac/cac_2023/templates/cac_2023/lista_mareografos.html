@@ -16,17 +16,28 @@
 {% endblock %}
 
 {% block contenido %} 
-
-<ul>
-    {% for mareografo in object_list %}
-        <li>
-            <p> Nombre: {{mareografo.nombre}} </p>
-            <p> Tipo de sensor: {{mareografo.tipo}} </p>
-            <p> Marca: {{mareografo.marca}} </p>
-            <p> Modelo: {{mareografo.modelo}} </p>
-            <p> Número de serie: {{mareografo.s_n}} </p>
-        </li>
-        {% endfor %}
-</ul>
-
+<div class="container">
+    <table class = "table table-striped">
+        <thead class = "table-primary">
+            <tr>
+                <th> Nombre </th>
+                <th> Tipo de sensor </th>
+                <th> Marca </th>
+                <th> Modelo </th>
+                <th> Número de serie </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mareografo in object_list %}
+                <tr>
+                    <td> <a href="{% url 'ver_detalles' %}"> {{mareografo.nombre}} </a> </td>
+                    <td> {{mareografo.tipo}} </td>
+                    <td> {{mareografo.marca}} </td>
+                    <td> {{mareografo.modelo}} </td>
+                    <td> {{mareografo.s_n}} </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

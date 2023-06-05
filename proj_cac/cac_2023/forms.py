@@ -1,10 +1,12 @@
 from django import forms 
+from .models import Mareografo, Detalle_mareog
 from django.core.exceptions import ValidationError
 
 
 SELECTOR_AÑOS = range(1990,2024)
 
 Estaciones = [
+    ("Seleccione","Seleccione"),
     ("San_Fernando","San Fernando"),
     ("Palermo","Palermo"),
     ("La_Plata","La Plata"),
@@ -79,7 +81,18 @@ class EliminarDatosForm(forms.Form):
         )
     hora = forms.TimeField(label="Hora", required= True)
     
-class altaMareografoForm(forms.Form):
+class altaMareografoForm(forms.ModelForm):
+    class Meta:
+        model = Mareografo 
+        fields = "__all__"
+ 
+    
+class DetalleMareografoForm(forms.ModelForm):
+    class Meta:
+        model = Detalle_mareog
+        fields = "__all__"    
+    
+"""class altaMareografoForm(forms.Form):    
     est_mar = forms.CharField(label = "Nombre de Estacion", max_length= 15, required= True)
     tipo = forms.ChoiceField(
         label= "Tipo de sensor",
@@ -90,4 +103,5 @@ class altaMareografoForm(forms.Form):
     marca = forms.CharField(label = "Marca sensor", max_length= 15, required= True)
     modelo = forms.CharField(label = "Modelo", max_length= 15, required= True)
     s_n = forms.CharField(label = "Num de serie", max_length= 15, required= True)
+"""    
     

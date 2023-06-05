@@ -1,0 +1,44 @@
+{% extends "cac_2023/base.html" %}
+
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'cac_2023/css/datos.css' %}">
+{% endblock %}
+
+{% block titulo %} Lista de mareografos {% endblock %}
+
+{% block encabezado %} 
+
+<h1>PÁGINA DE DETALLES</h1>
+<div class="container">
+    <table class = "table table-striped">
+        <thead class = "table-primary">
+            <tr>
+                <th> Ubicacion </th>
+                <th> Posición </th>
+                <th> Contacto </th>
+                <th> Telefono    </th>
+                <th> Mareografo </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detalle_mareog in object_list %}
+                <tr>
+                    <td> {{detalle_mareog.ubicacion}} </td>
+                    <td> {{detalle_mareog.posicion}} </td>
+                    <td> {{detalle_mareog.nombre_contacto}} </td>
+                    <td> {{detalle_mareog.tel_contacto}} </td>
+                    <td> {{detalle_mareog.mareografo}} </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<h3> Mareógrafo: {{Detalle_mareog.mareografo}}</h3>
+
+{% endblock %}
+
+{% block contenido %} 
+
+{% endblock %}

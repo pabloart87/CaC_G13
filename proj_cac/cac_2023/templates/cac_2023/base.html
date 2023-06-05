@@ -42,6 +42,7 @@
                     <ul class="dropdown-menu">
                       {% if user.is_authenticated %}
                       <li><a class="dropdown-item" href="{% url 'lista_mareografos' %}">Lista de mareógrafos</a></li>
+                      <li><a class="dropdown-item" href="{% url 'ver_detalles' %}">Detalles de mareografo </a></li>
                       <li><a class="dropdown-item" href="{% url 'alta_mareografo' %}">Alta de mareógrafo </a></li>
                       <li><a class="dropdown-item" href="{% url 'ingresar_datos' %}">Ingresar</a></li>
                       <li><a class="dropdown-item" href="{% url 'eliminar_datos' %}">Eliminar</a></li>
