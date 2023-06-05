@@ -1,0 +1,26 @@
+{% extends "cac_2023/base.html" %}
+
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'cac_2023/css/datos.css' %}">
+{% endblock %}
+
+{% block titulo %} Detalle de mareografos {% endblock %}
+
+{% block encabezado %}
+
+<h1> DETALLE DE MAREÓGRAFOS  </h1>
+<h2> Agregá los campos para detalles si deseas </h2>
+
+{% endblock %} 
+
+{% block contenido %}
+
+<form method="POST">    
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type= "submit" value="Guardar">
+</form>
+<a href="{% url 'inicio' %}"> Agregar luego </a>
+{% endblock %} 
