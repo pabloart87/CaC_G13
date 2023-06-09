@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cac_2023',
-
+    "bootstrap_datepicker_plus",
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'db_mareografos',
         'USER': 'postgres',
-        'PASSWORD': 'Pablo33120!',
+        'PASSWORD': 'admin',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -147,7 +147,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'inicio'
+
+ACCOUNT_LOGOUT_REDIRECT_URL = 'inicio'
 
 # SOCIALACCOUNT_PROVIDERS = {
 #     'google': {
