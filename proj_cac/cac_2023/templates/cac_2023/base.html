@@ -53,11 +53,19 @@
                     </ul>
                   </li>
                   {% if user.is_authenticated %}
-                  <button class="btn btn-primary me-md-2 btn-sm" type="button">{{ user.username.upper }} Logueado</button>                  
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Bienvenido {{ user.username.upper }}
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li>
+                    </ul>  
+                  <!-- <button class="btn btn-primary me-md-2 btn-sm" type="button">{{ user.username.upper }} Logueado</button>                   -->
                   {% else %}
                   <li class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button class="btn btn-primary me-md-2 btn-sm" type="button">Registrarse</button>
-                    <button class="btn btn-primary me-md-2 btn-sm" type="button">Acceder</button>
+                    <!-- <button class="btn btn-primary me-md-2 btn-sm" type="button">Registrarse</button> -->
+                    <a class="nav-link"href="{% url 'login' %}">Acceder</a>
+                    <!-- <button class="btn btn-primary me-md-2 btn-sm" action="{% url 'login' %}" type="button">Acceder</button> -->
                   </li>
                   {% endif %}
                 </ul>

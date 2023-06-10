@@ -28,6 +28,9 @@ class Detalle_mareog(models.Model):
     nombre_contacto = models.CharField(max_length=50, verbose_name="Nombre contacto")
     tel_contacto = models.IntegerField(verbose_name="Teléfono de contacto", help_text="Sin 0 y sin 15")
     mareografo = models.OneToOneField(Mareografo, on_delete=models.CASCADE, primary_key=True) #Uno a Uno
+
+    def __str__(self):
+        return f"{self.mareografo} |  {self.ubicacion} |  {self.posicion} |"
     
 class Datos_sensores(models.Model):
     class Meta:
@@ -44,7 +47,7 @@ class Datos_sensores(models.Model):
     
 class Sensor_hidrostatico(models.Model):
     class Meta:
-        verbose_name_plural = ("SENSOR HIDROSTÁTICO")
+        verbose_name_plural = ("SENSORES HIDROSTÁTICOS")
 
     tipo = models.CharField(max_length=8, verbose_name="Tipo de sensor")
     mareografos = models.ManyToManyField(Mareografo) #Muchos a Muchos
