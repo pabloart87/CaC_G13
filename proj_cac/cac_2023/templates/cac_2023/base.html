@@ -53,11 +53,12 @@
                     </ul>
                   </li>
                   {% if user.is_authenticated %}
-                  <button class="btn btn-primary me-md-2 btn-sm" type="button">{{ user.username.upper }} Logueado</button>                  
+                  <button class="btn btn-primary me-md-2 btn-sm" type="button">{{ user.username.upper }} Logueado</button> 
+                  <button class="btn btn-primary me-md-2 btn-sm" type="button" href="{% url 'logout' %}">Logout</button>                 
                   {% else %}
                   <li class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button class="btn btn-primary me-md-2 btn-sm" type="button">Registrarse</button>
-                    <button class="btn btn-primary me-md-2 btn-sm" type="button">Acceder</button>
+                    <a class="btn btn-primary me-md-2 btn-sm" type="button" href="{% url 'login' %}">Acceder</a>
                   </li>
                   {% endif %}
                 </ul>
