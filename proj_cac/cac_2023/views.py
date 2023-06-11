@@ -131,4 +131,10 @@ def inicio(request):
     
 #    context = {}
     
-#    return render(request, "cac_2023/login.html", context )
+    return render(request, "login.html", context )
+
+def logout(request):
+    
+    context = {}
+    
+    return render(request, "cac_2023/index.html", context )

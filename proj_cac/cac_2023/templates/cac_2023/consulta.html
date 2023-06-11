@@ -4,6 +4,10 @@
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'cac_2023/css/datos.css' %}">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> 
+    {{ form.media }}  {# Adds widget's JS/CSS files from CDN #}
+
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 {% endblock %}
 
 {% block titulo %} Consultar {% endblock %}
@@ -17,9 +21,96 @@
 
 {% block contenido %}
 
-<form method="POST">    
+
+<form method="POST"> 
     {% csrf_token %}
     {{form.as_p}}
-    <input type= "submit">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end"></div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+    </div>           
 </form>
+<!-- <form method="post" class="needs-validation" novalidate>
+    {% csrf_token %}
+    <div class="form-group col-md-3">
+      <label for="{{ form.nombre.id_for_label }}" class="form-label">Nombre</label>
+      <input type="text" id="{{ form.nombre.id_for_label }}" name="{{ form.nombre.html_name }}" class="form-control" maxlength="15" required>
+      <div class="invalid-feedback">
+        Por favor, ingresa tu nombre.
+      </div>
+    </div>
+    
+    <div class="form-group col-md-3">
+      <label for="{{ form.apellido.id_for_label }}" class="form-label">Apellido</label>
+      <input type="text" id="{{ form.apellido.id_for_label }}" name="{{ form.apellido.html_name }}" class="form-control" maxlength="15" required>
+      <div class="invalid-feedback">
+        Por favor, ingresa tu apellido.
+      </div>
+    </div>
+    
+    <div class="form-group col-md-3">
+      <label for="{{ form.mail.id_for_label }}" class="form-label">Email</label>
+      <input type="email" id="{{ form.mail.id_for_label }}" name="{{ form.mail.html_name }}" class="form-control" required>
+      <div class="invalid-feedback">
+        Por favor, ingresa un correo electrónico válido.
+      </div>
+    </div>
+    
+    <div class="form-group col-md-3">
+      <label for="{{ form.est_mar.id_for_label }}" class="form-label">Estación Mareográfica</label>
+      <select id="{{ form.est_mar.id_for_label }}" name="{{ form.est_mar.html_name }}" class="form-control" required>
+        {% for value, label in form.est_mar.choices %}
+          <option value="{{ value }}">{{ label }}</option>
+        {% endfor %}
+      </select>
+      <div class="invalid-feedback">
+        Por favor, selecciona una estación mareográfica.
+      </div>
+    </div>
+    
+    <div class="form-group col-md-3">
+      <label for="{{ form.fecha_ini.id_for_label }}" class="form-label">Fecha de inicio</label>
+      <input type="text" id="{{ form.fecha_ini.id_for_label }}" name="{{ form.fecha_ini.html_name }}" class="form-control datepicker" required>
+      <div class="invalid-feedback">
+        Por favor, ingresa una fecha de inicio válida.
+      </div>
+    </div>
+    
+    <div class="form-group col-md-3">
+      <label for="{{ form.hora_ini.id_for_label }}" class="form-label">Hora de inicio</label>
+      <input type="text" id="{{ form.hora_ini.id_for_label }}" name="{{ form.hora_ini.html_name }}" class="form-control timepicker" required>
+      <div class="invalid-feedback">
+        Por favor, ingresa una hora de inicio válida.
+      </div>
+    </div>
+    
+    <div class="form-group col-md-3">
+      <label for="{{ form.fecha_fin.id_for_label }}" class="form-label">Fecha fin</label>
+      <input type="text" id="{{ form.fecha_fin.id_for_label }}" name="{{ form.fecha_fin.html_name }}" class="form-control datepicker" required>
+      <div class="invalid-feedback">
+        Por favor, ingresa una fecha de fin válida.
+      </div>
+    </div>
+    
+    <div class="form-group col-md-3">
+        <label for="{{ form.hora_fin.id_for_label }}" class="form-label">Hora de fin</label>
+        <input type="TimePickerInput" id="{{ form.hora_fin.id_for_label }}" name="{{ form.hora_fin.html_name }}" required>
+        <div class="invalid-feedback">
+          Por favor, ingresa una hora de fin válida.
+        </div>
+      </div>
+      
+      <div class="form-group col-md-3">
+        <label for="{{ form.descr.id_for_label }}" class="form-label">Descripción</label>
+        <textarea id="{{ form.descr.id_for_label }}" name="{{ form.descr.html_name }}" class="form-control" placeholder="Describe el uso que le darás a los datos..." rows="5" cols="50" required></textarea>
+        <div class="invalid-feedback">
+          Por favor, ingresa una descripción.
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+   -->
+
+
+<!-- <script  src="{% static 'js/script.js' %}"></script>   -->
 {% endblock %}

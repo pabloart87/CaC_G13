@@ -1,0 +1,40 @@
+
+{% extends "cac_2023/base.html" %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'cac_2023/css/datos.css' %}">
+{% endblock %}
+
+{% block titulo %} Logged out! {% endblock %}
+
+{% block encabezado %}
+
+ <h1>DESLOGUEADO</h1>
+
+{% endblock %} 
+
+{% block contenido %}
+
+<section class="vh-100 py-5 mt-5" style="background-color: #eee;">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-8 col-xl-8">
+          <div class="card text-black" style="border-radius: 25px;">
+            <div class="card-body p-5">
+              <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-12 col-xl-12 order-2 order-lg-1 text-center p-5">
+                  <p class="text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4">Su sesión se ha cerrado correctamente.</p>
+                  <a href="{% url 'inicio' %}" class="btn btn-primary btn-lg">Volver al inicio</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %} 
+
+

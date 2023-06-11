@@ -13,9 +13,9 @@ urlpatterns = [
     path("inicio", views.inicio, name="inicio"),
     path("alta_mareografo", views.alta_mareografo, name="alta_mareografo"),
     path("detalle_mareografos", views.detalle_mareografos, name="detalle_mareografos"),
-    #path("login", views.login, name="login"),
+    # path("login", views.login, name="logout"),
     #path('', TemplateView.as_view(template_name="cac_2023/login.html")),
-    # path('account/login/',auth_views.LoginView.as_view(template_name='cac_2023/login.html'), name='login'),
+    #path('account/logout/',auth_views.LoginView.as_view(template_name='cac_2023/index.html')),
     # path('accounts/', include('allauth.urls')),
     
 ]
