@@ -2,12 +2,13 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.views.generic.list import ListView
 from django.contrib.auth.views import LoginView
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 
 from django.contrib import messages
 from .forms import ConsultaForm, IngresarDatosForm, EliminarDatosForm, altaMareografoForm, DetalleMareografoForm
 from .models import Mareografo, Detalle_mareog
 
+@permission_required('cac_2023.add_mareografo')
 @login_required
 def alta_mareografo(request):
     if request.method == "POST":
@@ -34,6 +35,7 @@ def alta_mareografo(request):
         
     return render(request, "cac_2023/alta_mareografo.html", context)
 
+@login_required
 def detalle_mareografos(request):
     if request.method == "POST":
         detalle_form = DetalleMareografoForm(request.POST)
@@ -96,14 +98,14 @@ class lista_mareografos(ListView):
     context_object_name = "Mareógrafos"
     template_name = "cac_2023/lista_mareografos.html"
     ordering = ["nombre"]
-    
+
 class ver_detalles(ListView):
     model = Detalle_mareog
     context_object_name = "Detalles"
     template_name = "cac_2023/ver_detalles.html"
     ordering = ["mareografo"]
 
-
+@login_required
 def consulta(request):
     if request.method == "POST":
         consulta_form = ConsultaForm(request.POST)
@@ -125,9 +127,9 @@ def inicio(request):
     
     return render(request, "cac_2023/index.html", context )
 
-def login(request):
+#def login(request):
     
-    context = {}
+#    context = {}
     
     return render(request, "login.html", context )
 

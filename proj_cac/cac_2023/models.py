@@ -1,17 +1,11 @@
 from django.db import models
 
+
 class Mareografo(models.Model):
     class Meta:
         verbose_name_plural = ("MAREÓGRAFOS")
 
-    TipoSensor = (
-        ("PRESION","Presion"),
-        ("RADAR","Radar"),
-        ("FLOTADOR","Flotador"),
-    )
-
     nombre = models.CharField(max_length=50, verbose_name="Nombre")
-    tipo = models.CharField(max_length=8, choices = TipoSensor)
     marca = models.CharField(max_length=50, verbose_name="Marca")
     modelo = models.CharField(max_length=50, verbose_name="Modelo")
     s_n = models.CharField(max_length=50, verbose_name="S/N", primary_key=True)
@@ -19,18 +13,20 @@ class Mareografo(models.Model):
     def __str__(self):
         return f"{self.nombre} | S/N: {self.s_n} |"
     
+    
 class Detalle_mareog(models.Model):
     class Meta:
         verbose_name_plural = ("DETALLE MAREÓGRAFOS")
 
     ubicacion = models.CharField(max_length=50, verbose_name="Ubicación")
-    posicion = models.CharField(max_length=50, verbose_name="Posición", help_text="Formato: GG MM,MMMM GGG MM,MMMM ")
+    posicion = models.CharField(max_length=50, verbose_name="Posición", help_text="Formato: GG MM,MM (X) GGG MM,MM (X) ")
     nombre_contacto = models.CharField(max_length=50, verbose_name="Nombre contacto")
     tel_contacto = models.IntegerField(verbose_name="Teléfono de contacto", help_text="Sin 0 y sin 15")
     mareografo = models.OneToOneField(Mareografo, on_delete=models.CASCADE, primary_key=True) #Uno a Uno
 
     def __str__(self):
         return f"{self.mareografo} |  {self.ubicacion} |  {self.posicion} |"
+    
     
 class Datos_sensores(models.Model):
     class Meta:
@@ -45,10 +41,19 @@ class Datos_sensores(models.Model):
     direccion_viento = models.IntegerField(verbose_name="Dirección de viento")
     mareografo = models.OneToOneField(Mareografo, on_delete=models.CASCADE, primary_key=True) #Uno a Uno
     
+    
 class Sensor_hidrostatico(models.Model):
     class Meta:
-        verbose_name_plural = ("SENSORES HIDROSTÁTICOS")
-
-    tipo = models.CharField(max_length=8, verbose_name="Tipo de sensor")
+        verbose_name_plural = ("SENSOR HIDROSTÁTICO")
+   
+    TipoSensor = (
+        ("PRESION","Presion"),
+        ("RADAR","Radar"),
+        ("FLOTADOR","Flotador"),
+    )
+    tipo = models.CharField(max_length=8, choices = TipoSensor, verbose_name="Tipo de sensor")
     mareografos = models.ManyToManyField(Mareografo) #Muchos a Muchos
+    
+    def __str__(self):
+        return f"{self.tipo}"
     

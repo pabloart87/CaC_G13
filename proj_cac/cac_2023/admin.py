@@ -1,5 +1,5 @@
 from django.contrib import admin
-from cac_2023.models import Mareografo, Detalle_mareog, Datos_sensores, Sensor_hidrostatico
+from .models import Mareografo, Detalle_mareog, Datos_sensores, Sensor_hidrostatico
 
 admin.site.register(Mareografo)
 admin.site.register(Detalle_mareog)

@@ -151,6 +151,7 @@ LOGIN_REDIRECT_URL = 'inicio'
 
 ACCOUNT_LOGOUT_REDIRECT_URL = 'inicio'
 
+
 # SOCIALACCOUNT_PROVIDERS = {
 #     'google': {
 #         'SCOPE': [
