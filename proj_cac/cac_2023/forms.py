@@ -1,8 +1,8 @@
 from django import forms 
-from .models import Mareografo, Detalle_mareog
+from .models import Mareografo, Detalle_mareog, Sensor_hidrostatico
 from django.core.exceptions import ValidationError
-from bootstrap_datepicker_plus.widgets import DatePickerInput
-from bootstrap_datepicker_plus.widgets import DatePickerInput, TimePickerInput, DateTimePickerInput, MonthPickerInput, YearPickerInput
+#from bootstrap_datepicker_plus.widgets import DatePickerInput
+#from bootstrap_datepicker_plus.widgets import DatePickerInput, TimePickerInput, DateTimePickerInput, MonthPickerInput, YearPickerInput
 
 SELECTOR_AÑOS = range(1990,2024)
 
@@ -144,16 +144,9 @@ class DetalleMareografoForm(forms.ModelForm):
         model = Detalle_mareog
         fields = "__all__"    
     
-"""class altaMareografoForm(forms.Form):    
-    est_mar = forms.CharField(label = "Nombre de Estacion", max_length= 15, required= True)
-    tipo = forms.ChoiceField(
-        label= "Tipo de sensor",
-        required= True,
-        widget= forms.Select,
-        choices = TipoSensor,        
-    )
-    marca = forms.CharField(label = "Marca sensor", max_length= 15, required= True)
-    modelo = forms.CharField(label = "Modelo", max_length= 15, required= True)
-    s_n = forms.CharField(label = "Num de serie", max_length= 15, required= True)
-"""    
+class TipoSensorForm(forms.ModelForm):    
+    class Meta:
+        model = Sensor_hidrostatico 
+        fields = ["tipo"]
+   
     

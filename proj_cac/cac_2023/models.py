@@ -1,5 +1,20 @@
 from django.db import models
 
+class Sensor_hidrostatico(models.Model):
+    class Meta:
+        verbose_name_plural = ("SENSOR HIDROSTÁTICO")
+    
+    """TipoSensor = (
+        ("PRESION","Presion"),
+        ("RADAR","Radar"),
+        ("FLOTADOR","Flotador"),
+    )"""
+    tipo = models.CharField(max_length=8, verbose_name="Tipo de sensor")
+    #mareografos = models.ManyToManyField(Mareografo) #Muchos a Muchos
+    
+    def __str__(self):
+        return f"{self.tipo}"
+
 
 class Mareografo(models.Model):
     class Meta:
@@ -9,6 +24,7 @@ class Mareografo(models.Model):
     marca = models.CharField(max_length=50, verbose_name="Marca")
     modelo = models.CharField(max_length=50, verbose_name="Modelo")
     s_n = models.CharField(max_length=50, verbose_name="S/N", primary_key=True)
+    sensores = models.ManyToManyField(Sensor_hidrostatico, related_name="sensores")
 
     def __str__(self):
         return f"{self.nombre} | S/N: {self.s_n} |"
@@ -42,18 +58,7 @@ class Datos_sensores(models.Model):
     mareografo = models.OneToOneField(Mareografo, on_delete=models.CASCADE, primary_key=True) #Uno a Uno
     
     
-class Sensor_hidrostatico(models.Model):
-    class Meta:
-        verbose_name_plural = ("SENSOR HIDROSTÁTICO")
-   
-    TipoSensor = (
-        ("PRESION","Presion"),
-        ("RADAR","Radar"),
-        ("FLOTADOR","Flotador"),
-    )
-    tipo = models.CharField(max_length=8, choices = TipoSensor, verbose_name="Tipo de sensor")
-    mareografos = models.ManyToManyField(Mareografo) #Muchos a Muchos
+
     
-    def __str__(self):
-        return f"{self.tipo}"
+    
     

@@ -1,14 +1,14 @@
+from typing import Any, Dict
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
-from django.views.generic.list import ListView
+from django.http import HttpRequest, HttpResponseRedirect
+from django.views.generic import ListView, CreateView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required, permission_required
 
 from django.contrib import messages
-from .forms import ConsultaForm, IngresarDatosForm, EliminarDatosForm, altaMareografoForm, DetalleMareografoForm
+from .forms import ConsultaForm, IngresarDatosForm, EliminarDatosForm, altaMareografoForm, DetalleMareografoForm, TipoSensorForm
 from .models import Mareografo, Detalle_mareog
 
-@permission_required('cac_2023.add_mareografo')
 @login_required
 def alta_mareografo(request):
     if request.method == "POST":
@@ -34,6 +34,36 @@ def alta_mareografo(request):
     context = {"form": alta_form}
         
     return render(request, "cac_2023/alta_mareografo.html", context)
+
+"""class alta_mareografo(CreateView):
+    model = Mareografo
+    template_name = "cac_2023/alta_mareografo.html"
+    form_class = altaMareografoForm
+    second_form_class = TipoSensorForm
+    
+    def get_context_data(self, **kwargs):
+        context = super(alta_mareografo, self).get_context_data(**kwargs)
+        if "form" not in context:
+            context["form"] = self.form_class(self.request.GET)
+        if "form2" not in context:
+            context["form2"] = self.second_form_class(self.request.GET)
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object
+        form = self.form_class(request.POST)
+        form2 = self.second_form_class(request.POST)
+        if form.is_valid() and form2.is_valid():
+            sensor = form.save(commit = False)
+            sensor.mareografo = form2.save()
+            sensor.save() 
+            #return HttpResponseRedirect(self.get_success_url())
+            messages.add_message(request, messages.SUCCESS, "Mareógrafo dado de alta exitosamente", extra_tags="tag1")
+            
+            return redirect("detalle_mareografos")
+        else:
+            return self.render_to_response(self.get_context_data(form=form, form2=form2 ))"""
+
 
 @login_required
 def detalle_mareografos(request):
@@ -131,7 +161,7 @@ def inicio(request):
     
 #    context = {}
     
-    return render(request, "login.html", context )
+    #return render(request, "login.html", context )
 
 def logout(request):
     
