@@ -4,14 +4,8 @@ class Sensor_hidrostatico(models.Model):
     class Meta:
         verbose_name_plural = ("SENSOR HIDROSTÁTICO")
     
-    """TipoSensor = (
-        ("PRESION","Presion"),
-        ("RADAR","Radar"),
-        ("FLOTADOR","Flotador"),
-    )"""
     tipo = models.CharField(max_length=8, verbose_name="Tipo de sensor")
-    #mareografos = models.ManyToManyField(Mareografo) #Muchos a Muchos
-    
+
     def __str__(self):
         return f"{self.tipo}"
 
@@ -57,8 +51,6 @@ class Datos_sensores(models.Model):
     direccion_viento = models.IntegerField(verbose_name="Dirección de viento")
     mareografo = models.OneToOneField(Mareografo, on_delete=models.CASCADE, primary_key=True) #Uno a Uno
     
-    
-
-    
-    
+    def __str__(self):
+        return f"{self.fecha} |  {self.hora} |  {self.mareografo} |"
     

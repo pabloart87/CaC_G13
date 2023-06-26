@@ -35,38 +35,52 @@
                   <li class="nav-item">
                     <a class="nav-link"href="{% url 'inicio' %}">Inicio</a>
                   </li>
+
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Mareógrafos
+                    </a>
+                    <ul class="dropdown-menu">
+                      {% if user.is_authenticated %}
+                      <li><a class="dropdown-item" href="{% url 'lista_mareografos' %}">Listado</a></li>
+                      <li><a class="dropdown-item" href="{% url 'ver_detalles' %}">Detalles</a></li>
+                      <li><a class="dropdown-item" href="{% url 'alta_mareografo' %}">Dar de alta</a></li>
+                      {% else %}
+                      <li><a class="dropdown-item" href="{% url 'lista_mareografos' %}">Lista de mareógrafos</a></li>
+                      {% endif %}
+                    </ul>
+                  </li>
+
+
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Datos
                     </a>
                     <ul class="dropdown-menu">
                       {% if user.is_authenticated %}
-                      <li><a class="dropdown-item" href="{% url 'lista_mareografos' %}">Lista de mareógrafos</a></li>
-                      <li><a class="dropdown-item" href="{% url 'ver_detalles' %}">Detalles de mareografo </a></li>
-                      <li><a class="dropdown-item" href="{% url 'alta_mareografo' %}">Alta de mareógrafo </a></li>
                       <li><a class="dropdown-item" href="{% url 'ingresar_datos' %}">Ingresar</a></li>
                       <li><a class="dropdown-item" href="{% url 'eliminar_datos' %}">Eliminar</a></li>
                       <li><a class="dropdown-item" href="{% url 'consulta' %}">Consultas</a></li>
                       {% else %}
-                      <li><a class="dropdown-item" href="{% url 'lista_mareografos' %}">Lista de mareógrafos</a></li>
                       <li><a class="dropdown-item" href="{% url 'consulta' %}">Consultas</a></li>
                       {% endif %}
                     </ul>
                   </li>
+
                   {% if user.is_authenticated %}
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Bienvenido {{ user.username.upper }}
+                      Bienvenido/a {{ user.username.upper }}
                     </a>
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li>
                     </ul>  
-                  <!-- <button class="btn btn-primary me-md-2 btn-sm" type="button">{{ user.username.upper }} Logueado</button>                   -->
+
                   {% else %}
                   <li class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <!-- <button class="btn btn-primary me-md-2 btn-sm" type="button">Registrarse</button> -->
+
                     <a class="nav-link"href="{% url 'login' %}">Acceder</a>
-                    <!-- <button class="btn btn-primary me-md-2 btn-sm" action="{% url 'login' %}" type="button">Acceder</button> -->
+
                   </li>
                   {% endif %}
                 </ul>

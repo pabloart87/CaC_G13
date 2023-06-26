@@ -1,8 +1,6 @@
 from django import forms 
 from .models import Mareografo, Detalle_mareog, Sensor_hidrostatico
 from django.core.exceptions import ValidationError
-#from bootstrap_datepicker_plus.widgets import DatePickerInput
-#from bootstrap_datepicker_plus.widgets import DatePickerInput, TimePickerInput, DateTimePickerInput, MonthPickerInput, YearPickerInput
 
 SELECTOR_AÑOS = range(1990,2024)
 
@@ -17,30 +15,11 @@ Estaciones = [
     ("Puerto_Belgrano","Puerto Belgrano"),
 ]
 
-TipoSensor = [
-    ("presion","Presion"),
-    ("radar","Radar"),
-    ("flotador","Flotador"),
-]
-
 class ConsultaForm(forms.Form):
     nombre = forms.CharField(label = "Nombre", max_length= 15, required= True)
     apellido = forms.CharField(label = "Apellido", max_length= 15, required= True)
     mail = forms.EmailField(label = "Email", required= True)
-    #telefono =   
-    
-    # todo = forms.CharField()
 
-
-    # class Meta:
-
-    #     model = Mareografo
-    #     fields = ["name", "start_date", "end_date"]
-    #     widgets = {
-    #         "start_date": DatePickerInput(),
-    #         "end_date": DatePickerInput(options={"format": "DD/MM/YYYY"}),
-    #     }
-    
 
     est_mar = forms.ChoiceField(
         label= "Estación Mareográfica",
@@ -48,18 +27,7 @@ class ConsultaForm(forms.Form):
         widget= forms.Select,
         choices = Estaciones,        
     ) 
-    # fecha_ini = forms.DateField(label= "Fecha de inicio", required= True,
-    #     widget=DatePickerInput(options={"format": "DD/MM/YYYY"}))
-    
-    # hora_ini = forms.DateField(label="Hora de inicio",required= True,
-    #     widget=TimePickerInput(options={"format": "hh:mm"}))
 
-
-    # fecha_fin = forms.DateField(label= "Fecha fin",required= True,
-    #     widget=DatePickerInput(options={"format": "DD/MM/YYYY"})))
-
-    # hora_fin = forms.DateField(label="Hora de fin",required= True,
-    #     widget=TimePickerInput(options={"format": "hh:mm"}))
     fecha_ini = forms.DateField(
         label= "Fecha de inicio", 
         required= True,
@@ -77,28 +45,12 @@ class ConsultaForm(forms.Form):
         widget=forms.Textarea(
         attrs=
         {
-        #'class': 'form-control col-12 mb-3',   
-        # 'class': 'form-control',
+
         "placeholder": "Describe el uso que le darás a los datos...",
         "rows":5,
         "cols":50,
         }),)
-    
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['miCampo'].widget.attrs.update({'class': 'form-control mb-3'})
-    #     self.fields['descr'].widget.attrs.update({'class': 'form-control'})
- 
-
-    # def as_mis_campos(self):
-    #     return self._html_output(
-    #         normal_row='<div class="col-12 mb-3">{label}{field}{help_text}</div>',
-    #         error_row='{errors}',
-    #         row_ender='</div>',
-    #         help_text_html='<small class="form-text text-muted">{help_text}</small>',
-    #         errors_on_separate_row=True
-    #     )
-                        
+            
 
 class IngresarDatosForm(forms.Form):
     est_mar = forms.ChoiceField(

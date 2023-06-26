@@ -85,9 +85,9 @@ WSGI_APPLICATION = 'proj_cac.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db_mareografos',
+        'NAME': 'db_mareografos_2',
         'USER': 'postgres',
-        'PASSWORD': 'Pablo33120!',
+        'PASSWORD': 'admin',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
