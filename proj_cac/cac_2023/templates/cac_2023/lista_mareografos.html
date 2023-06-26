@@ -21,7 +21,6 @@
         <thead class = "table-primary">
             <tr>
                 <th> Nombre </th>
-                <th> Tipo de sensor </th>
                 <th> Marca </th>
                 <th> Modelo </th>
                 <th> Número de serie </th>
@@ -31,7 +30,6 @@
             {% for mareografo in object_list %}
                 <tr>
                     <td> <a href="{% url 'ver_detalles' %}"> {{mareografo.nombre}} </a> </td>
-                    <td> {{mareografo.tipo}} </td>
                     <td> {{mareografo.marca}} </td>
                     <td> {{mareografo.modelo}} </td>
                     <td> {{mareografo.s_n}} </td>

@@ -10,19 +10,12 @@ from .forms import ConsultaForm, IngresarDatosForm, EliminarDatosForm, altaMareo
 from .models import Mareografo, Detalle_mareog
 
 @login_required
+@permission_required("cac_2023.add_mareografo")
 def alta_mareografo(request):
     if request.method == "POST":
         alta_form = altaMareografoForm(request.POST)
         if alta_form.is_valid():
-            
-            """mareografo_nuevo = Mareografo(
-                nombre = alta_form.cleaned_data["est_mar"],
-                tipo = alta_form.cleaned_data["tipo"],
-                marca = alta_form.cleaned_data["marca"],
-                modelo = alta_form.cleaned_data["modelo"],
-                s_n = alta_form.cleaned_data["s_n"],
-            )"""
-            
+                       
             alta_form.save()
             
             messages.add_message(request, messages.SUCCESS, "Mareógrafo dado de alta exitosamente", extra_tags="tag1")
@@ -35,49 +28,12 @@ def alta_mareografo(request):
         
     return render(request, "cac_2023/alta_mareografo.html", context)
 
-"""class alta_mareografo(CreateView):
-    model = Mareografo
-    template_name = "cac_2023/alta_mareografo.html"
-    form_class = altaMareografoForm
-    second_form_class = TipoSensorForm
-    
-    def get_context_data(self, **kwargs):
-        context = super(alta_mareografo, self).get_context_data(**kwargs)
-        if "form" not in context:
-            context["form"] = self.form_class(self.request.GET)
-        if "form2" not in context:
-            context["form2"] = self.second_form_class(self.request.GET)
-        return context
-    
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object
-        form = self.form_class(request.POST)
-        form2 = self.second_form_class(request.POST)
-        if form.is_valid() and form2.is_valid():
-            sensor = form.save(commit = False)
-            sensor.mareografo = form2.save()
-            sensor.save() 
-            #return HttpResponseRedirect(self.get_success_url())
-            messages.add_message(request, messages.SUCCESS, "Mareógrafo dado de alta exitosamente", extra_tags="tag1")
-            
-            return redirect("detalle_mareografos")
-        else:
-            return self.render_to_response(self.get_context_data(form=form, form2=form2 ))"""
-
 
 @login_required
 def detalle_mareografos(request):
     if request.method == "POST":
         detalle_form = DetalleMareografoForm(request.POST)
         if detalle_form.is_valid():
-            
-            """detalleMareografo = Detalle_mareog(
-                ubicacion = detalle_form.cleaned_data["est_mar"],
-                posicion = detalle_form.cleaned_data["tipo"],
-                nombre_contacto = detalle_form.cleaned_data["marca"],
-                tel_contacto = detalle_form.cleaned_data["modelo"],
-                mareografo = detalle_form.cleaned_data["s_n"],
-            )"""
             
             detalle_form.save()
             
@@ -92,6 +48,7 @@ def detalle_mareografos(request):
     return render(request, "cac_2023/detalle_mareografos.html", context)
 
 @login_required
+@permission_required("cac_2023.add_mareografo")
 def ingreso_datos(request):
     if request.method == "POST":
         ingreso_form = IngresarDatosForm(request.POST)
@@ -108,6 +65,7 @@ def ingreso_datos(request):
     return render(request, "cac_2023/ingreso_datos.html", context)
 
 @login_required
+@permission_required("cac_2023.add_mareografo")
 def eliminar_datos(request):
     if request.method == "POST":
         eliminar_form = EliminarDatosForm(request.POST)
@@ -135,7 +93,6 @@ class ver_detalles(ListView):
     template_name = "cac_2023/ver_detalles.html"
     ordering = ["mareografo"]
 
-@login_required
 def consulta(request):
     if request.method == "POST":
         consulta_form = ConsultaForm(request.POST)
@@ -156,12 +113,6 @@ def inicio(request):
     context = {}
     
     return render(request, "cac_2023/index.html", context )
-
-#def login(request):
-    
-#    context = {}
-    
-    #return render(request, "login.html", context )
 
 def logout(request):
     
