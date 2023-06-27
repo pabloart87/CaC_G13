@@ -6,27 +6,19 @@
     <link rel="stylesheet" href="{% static 'cac_2023/css/datos.css' %}">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> 
     {{ form.media }}  {# Adds widget's JS/CSS files from CDN #}
-
 {% endblock %}
 
-{% block titulo %} Consultar {% endblock %}
+{% block titulo %} Tablas de mareas {% endblock %}
 
 {% block encabezado %}
-
-<h1>CONSULTAS</h1>
-<h3>Háganos saber su consulta y nos pondremos en contacto a la brevedad.</h3>
-
+    <h1>Tablas de mareas</h1>
+    <h3>Seleccione el mareógrafo de su predilección:</h3>
 {% endblock %}
 
 {% block contenido %}
-
-
-  <form method="POST"> 
-      {% csrf_token %}
-      {{form.as_p}}
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end"></div>
-      <button type="submit" class="btn btn-primary">Enviar</button>
-      </div>           
-  </form>
- 
+    <ul>
+        {% for x in mareas %}
+            <li><a href="tb_mareas/detalles/{{ x.mareografo_id }}"> {{ x.mareografo_id }}</a>  | {{ x.ubicacion }} | {{ x.posicion }} </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
