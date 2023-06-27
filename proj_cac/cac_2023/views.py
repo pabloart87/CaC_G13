@@ -9,6 +9,7 @@ from django.contrib import messages
 from .forms import ConsultaForm, IngresarDatosForm, EliminarDatosForm, altaMareografoForm, DetalleMareografoForm, TipoSensorForm
 from .models import Mareografo, Detalle_mareog
 
+@permission_required("cac_2023.add_mareografo")
 @login_required
 def alta_mareografo(request):
     if request.method == "POST":
