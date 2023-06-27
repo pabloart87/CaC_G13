@@ -7,7 +7,10 @@ from django.contrib.auth.decorators import login_required, permission_required
 
 from django.contrib import messages
 from .forms import ConsultaForm, IngresarDatosForm, EliminarDatosForm, altaMareografoForm, DetalleMareografoForm, TipoSensorForm
-from .models import Mareografo, Detalle_mareog
+from .models import Mareografo, Detalle_mareog, Datos_sensores
+
+from django.http import HttpResponse
+from django.template import loader
 
 @login_required
 @permission_required("cac_2023.add_mareografo")
@@ -119,3 +122,19 @@ def logout(request):
     context = {}
     
     return render(request, "cac_2023/index.html", context )
+
+def tb_mareas(request):
+    mareas = Detalle_mareog.objects.all().values()
+    template = loader.get_template('cac_2023/tb_mareas.html')
+    context = {
+        'mareas': mareas,
+    }
+    return HttpResponse(template.render(context, request))
+
+def detalles(request, mareografo):
+    medidas = Datos_sensores.objects.filter(mareografo_id=mareografo).values()
+    template = loader.get_template('cac_2023/detalles.html')
+    context = {
+        'medidas': medidas,
+    }
+    return HttpResponse(template.render(context, request))
