@@ -138,8 +138,3 @@ def detalles(request, mareografo):
         'medidas': medidas,
     }
     return HttpResponse(template.render(context, request))
-
-"""
-    context = {}
-    return render(request, "cac_2023/tb_mareas.html", context)
-"""
