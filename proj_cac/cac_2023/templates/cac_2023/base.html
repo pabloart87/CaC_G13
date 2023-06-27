@@ -57,6 +57,7 @@
                       Datos
                     </a>
                     <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="{% url 'tb_mareas' %}">Tablas de mareas</a></li>
                       {% if user.is_authenticated %}
                       <li><a class="dropdown-item" href="{% url 'ingresar_datos' %}">Ingresar</a></li>
                       <li><a class="dropdown-item" href="{% url 'eliminar_datos' %}">Eliminar</a></li>
